@@ -11,16 +11,27 @@ async function getDataCovid19() {
         console.log(`Nhiễm mới: ${NewConfirmed} - Số người chết mới: ${NewDeaths} - Tổng số người chết: ${totalDeaths}`);
         let limitOfLoop = DataCovid19.data.Countries;
         let arrDataTotalDeaths = [];
+        let arrDataTotalNewConfirmed = []
         for (let i = 0; i < limitOfLoop.length; i++) {
             arrDataTotalDeaths.push(limitOfLoop[i].TotalDeaths);
         }
-        const largesttotalDeaths = arrDataTotalDeaths.reduce((prev, curr) => prev > curr ? prev : curr)
-        console.log(`Quốc Gia có số lượng tổng cộng người chết nhiều nhất là: ${ largesttotalDeaths}`);
+
+        let largesttotalDeaths = arrDataTotalDeaths.reduce((prev, curr) => prev > curr ? prev : curr)
         for (let j = 0; j < limitOfLoop.length; j++) {
             if (largesttotalDeaths === limitOfLoop[j].TotalDeaths) {
-                console.log(`Quốc Gia có số lượng người mắc mới trong ngày nhiều nhất là: ${limitOfLoop[j].Country}`);
+                console.log(`Quốc Gia có số lượng tổng cộng người chết nhiều nhất là: ${limitOfLoop[j].Country} ( ${ largesttotalDeaths})`);
             }
         }
+        for (let m = 0; m < limitOfLoop.length; m++) {
+            arrDataTotalNewConfirmed.push(limitOfLoop[m].NewConfirmed)
+        }
+        let largesttotalNewConfirmed = arrDataTotalNewConfirmed.reduce((prev, curr) => prev > curr ? prev : curr);
+        for (let l = 0; l < limitOfLoop.length; l++) {
+            if (largesttotalNewConfirmed === limitOfLoop[l].NewConfirmed) {
+                console.log(`Quốc Gia có số lượng người mắc mới trong ngày nhiều nhất là: ${limitOfLoop[l].Country} (${largesttotalNewConfirmed})`);
+            }
+        }
+
     } catch (error) {
         console.log(error);
     }

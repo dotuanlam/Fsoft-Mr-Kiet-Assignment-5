@@ -20,14 +20,23 @@ getDataCovid19(DataCovid19)
     .then(((data) => {
         let limitOfLoop = data.data.Countries;
         let arrDataTotalDeaths = [];
+        let arrDataTotalNewConfirmed = [];
         for (let i = 0; i < limitOfLoop.length; i++) {
             arrDataTotalDeaths.push(limitOfLoop[i].TotalDeaths);
         }
         const largesttotalDeaths = arrDataTotalDeaths.reduce((prev, curr) => prev > curr ? prev : curr)
-        console.log(`Quốc Gia có số lượng tổng cộng người chết nhiều nhất là: ${ largesttotalDeaths}`);
         for (let j = 0; j < limitOfLoop.length; j++) {
             if (largesttotalDeaths === limitOfLoop[j].TotalDeaths) {
-                console.log(`Quốc Gia có số lượng người mắc mới trong ngày nhiều nhất là: ${limitOfLoop[j].Country}`);
+                console.log(`Quốc Gia có số lượng tổng cộng người chết nhiều nhất là: ${limitOfLoop[j].Country} ( ${ largesttotalDeaths})`);
+            }
+        }
+        for (let k = 0; k < limitOfLoop.length; k++) {
+            arrDataTotalNewConfirmed.push(limitOfLoop[k].NewConfirmed)
+        }
+        let largesttotalNewConfirmed = arrDataTotalNewConfirmed.reduce((prev, curr) => prev > curr ? prev : curr);
+        for (let z = 0; z < limitOfLoop.length; z++) {
+            if (largesttotalNewConfirmed === limitOfLoop[z].NewConfirmed) {
+                console.log(`Quốc Gia có số lượng người mắc mới trong ngày nhiều nhất là: ${limitOfLoop[z].Country} (${largesttotalNewConfirmed})`);
             }
         }
     }))
